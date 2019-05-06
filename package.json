@@ -21,6 +21,7 @@
     "url": "https://github.com/mathiassoeholm/use-anim/issues"
   },
   "homepage": "https://github.com/mathiassoeholm/use-anim#readme",
+  "devDependencies": {},
   "peerDependencies": {
     "react": "^16.8.6"
   },
