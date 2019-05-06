@@ -23,5 +23,11 @@
   "homepage": "https://github.com/mathiassoeholm/use-anim#readme",
   "peerDependencies": {
     "react": "^16.8.6"
-  }
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "/lib",
+    "/src"
+  ]
 }
