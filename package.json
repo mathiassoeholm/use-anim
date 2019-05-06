@@ -1,0 +1,24 @@
+{
+  "name": "use-anim",
+  "version": "0.1.0",
+  "description": "A super small hook-based animation library for React",
+  "main": "lib/index",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathiassoeholm/use-anim.git"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "hook"
+  ],
+  "author": "Mathias Soeholm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mathiassoeholm/use-anim/issues"
+  },
+  "homepage": "https://github.com/mathiassoeholm/use-anim#readme"
+}
