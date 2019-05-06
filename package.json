@@ -16,7 +16,7 @@
     "hook"
   ],
   "author": "Mathias Soeholm",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mathiassoeholm/use-anim/issues"
   },
