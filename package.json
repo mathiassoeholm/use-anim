@@ -22,10 +22,11 @@
   },
   "homepage": "https://github.com/mathiassoeholm/use-anim#readme",
   "devDependencies": {
-    "react": "^16.8.6"
+    "@types/react": "^16.8.0",
+    "react": "^16.8.0"
   },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "react": "^16.8.0"
   },
   "files": [
     "README.md",
