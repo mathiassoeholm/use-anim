@@ -1,6 +1,6 @@
 {
   "name": "use-anim",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A super small hook-based animation library for React",
   "main": "lib/index",
   "scripts": {
