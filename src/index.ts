@@ -1,6 +1,5 @@
-export const hello = () => {
-  console.log('hello')
-}
+import AnimationGroup from './AnimationGroup'
+export { AnimationGroup }
 
 import { useAnim } from './use-anim'
 export { useAnim }
