@@ -1,5 +1,6 @@
 import React from 'react'
-import { renderHook, act } from 'react-hooks-testing-library'
+import each from 'jest-each';
+import { renderHook } from 'react-hooks-testing-library'
 import { delay } from '@mathiassoeholm/js-utils/async'
 import {__createUseAnimEffect, useAnim} from './use-anim'
 import AnimationGroup from './AnimationGroup'
@@ -146,13 +147,16 @@ describe('use-anim', () => {
     expect(running).toBe(false)
   })
 
-  it('keeps running if play mode is loop', async () => {
+  each([
+    ['loop'],
+    ['pingPong'],
+  ]).test('keeps running with play mode %s', async (playMode) => {
     let running = false
 
     const animEffect = __createUseAnimEffect(true, undefined, {
       duration: 5,
       updateFunc: () => running = true,
-      playMode: 'loop',
+      playMode: playMode,
     })
 
     animEffect()
@@ -166,5 +170,24 @@ describe('use-anim', () => {
     await delay(25)
 
     expect(running).toBe(true)
+  })
+
+
+  it('ping pongs', async () => {
+
+    let expectedValue = 1
+
+    const animEffect = __createUseAnimEffect(true, undefined, {
+      duration: 0,
+      updateFunc: (t) => {
+        expect(t).toBe(expectedValue)
+        expectedValue = 1 - expectedValue
+      },
+      playMode: 'pingPong',
+    })
+
+    animEffect()
+
+    await delay(150)
   })
 })
