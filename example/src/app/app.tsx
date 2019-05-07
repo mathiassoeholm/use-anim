@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import './App.css';
+import ReactDOM from 'react-dom';
+import './app.css'
 import { useAnim } from 'use-anim'
 
-function App() {
+const App: React.FC = () => {
   const [translation, setTranslation] = useState(0);
 
   useAnim({
@@ -19,4 +20,7 @@ function App() {
   );
 }
 
-export default App;
+ReactDOM.render(
+  <App />,
+  document.getElementById("root")
+);

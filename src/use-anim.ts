@@ -31,46 +31,56 @@ export function useAnim(config: AnimationConfig) {
     setStartedAnimation(true)
   }
 
-  useEffect(() => {
-    if (!startedAnimation) {
-      return
-    }
-
-    let currentFrame: number|undefined = undefined
-    let delay = 0
-
-    if (animationContext) {
-      delay = animationContext.getStagger()
-      animationContext.increaseStagger()
-    }
-
-    setTimeout(() => {
-      const startTime = Date.now()
-
-      const update = () => {
-        const elapsed = Date.now() - startTime
-        let t = Math.min(1, elapsed/config.duration)
-
-        if (config.easing) {
-          t = config.easing(t)
-        }
-
-        config.updateFunc(t)
-
-        if (elapsed < config.duration) {
-          currentFrame = requestAnimationFrame(update)
-        }
-      }
-
-      currentFrame = requestAnimationFrame(update)
-    }, delay)
-
-    return () => {
-      if (currentFrame != undefined) {
-        cancelAnimationFrame(currentFrame)
-      }
-    }
-  }, [startedAnimation])
+  useEffect(
+    __createUseAnimEffect(startedAnimation, animationContext, config),
+    [startedAnimation],
+  )
 
   return { startedAnimation }
+}
+
+// This function is only important, such that it can be used in tests.
+export const __createUseAnimEffect = (
+  startedAnimation: boolean,
+  animationContext: AnimationContextProps|undefined,
+  config: AnimationConfig,
+) => () => {
+  if (!startedAnimation) {
+    return
+  }
+
+  let currentFrame: number|undefined = undefined
+  let delay = 0
+
+  if (animationContext) {
+    delay = animationContext.getStagger()
+    animationContext.increaseStagger()
+  }
+
+  setTimeout(() => {
+    const startTime = Date.now()
+
+    const update = () => {
+      const elapsed = Date.now() - startTime
+      let t = Math.min(1, elapsed/config.duration)
+
+      if (config.easing) {
+        t = config.easing(t)
+      }
+
+      config.updateFunc(t)
+
+      if (elapsed < config.duration) {
+        currentFrame = requestAnimationFrame(update)
+      }
+    }
+
+    currentFrame = requestAnimationFrame(update)
+  }, delay)
+
+  return () => {
+    if (currentFrame != undefined) {
+      cancelAnimationFrame(currentFrame)
+    }
+  }
 }
