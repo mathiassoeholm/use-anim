@@ -6,10 +6,12 @@ interface AnimationConfig {
   duration: number,
   easing?: Easing,
   started?: boolean,
+  playMode?: PlayMode,
 }
 
 type UpdateFunc = (t: number) => void
 type Easing = (t: number) => number
+type PlayMode = 'forward' | 'loop'
 
 export function useAnim(config: AnimationConfig) {
   // Auto start animation if no other options override this
@@ -58,7 +60,7 @@ export const __createUseAnimEffect = (
   }
 
   setTimeout(() => {
-    const startTime = Date.now()
+    let startTime = Date.now()
 
     const update = () => {
       const elapsed = Date.now() - startTime
@@ -71,6 +73,9 @@ export const __createUseAnimEffect = (
       config.updateFunc(t)
 
       if (elapsed < config.duration) {
+        currentFrame = requestAnimationFrame(update)
+      } else if (config.playMode === 'loop') {
+        startTime = Date.now()
         currentFrame = requestAnimationFrame(update)
       }
     }

@@ -11,6 +11,7 @@ const App: React.FC = () => {
     updateFunc: (t) => {
       setTranslation(t*200)
     },
+    playMode: 'loop',
   });
 
   return (
