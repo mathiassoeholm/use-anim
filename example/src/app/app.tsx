@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './app.css'
-import { useAnim } from 'use-anim'
+import { useAnim, easing } from 'use-anim'
 
 const App: React.FC = () => {
   const [translation, setTranslation] = useState(0);
@@ -12,6 +12,7 @@ const App: React.FC = () => {
       setTranslation(t*200)
     },
     playMode: 'pingPong',
+    easing: easing.easeOutQuad,
   });
 
   return (
