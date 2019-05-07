@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './app.css'
 import { useAnim, easing } from 'use-anim'
+import { lerp } from '@mathiassoeholm/js-utils/math'
 
 const App: React.FC = () => {
   const [translation, setTranslation] = useState(0);
@@ -12,7 +13,7 @@ const App: React.FC = () => {
   useAnim({
     duration: 2000,
     updateFunc: (t) => {
-      setTranslation(t*400)
+      setTranslation(lerp(-300, 300, t))
       setRotation(t*360)
     },
     playMode: 'pingPong',

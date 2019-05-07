@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/mathiassoeholm/use-anim#readme",
   "devDependencies": {
-    "@mathiassoeholm/js-utils": "^1.0.4",
+    "@mathiassoeholm/js-utils": "^1.0.9",
     "@types/jest": "^24.0.12",
     "@types/node": "^12.0.0",
     "@types/react": "^16.8.0",
