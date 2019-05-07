@@ -11,7 +11,7 @@ interface AnimationConfig {
 
 type UpdateFunc = (t: number) => void
 type Easing = (t: number) => number
-type PlayMode = 'forward' | 'loop' | 'pingPong'
+type PlayMode = 'forward' | 'reverse' | 'loop' | 'pingPong'
 
 export function useAnim(config: AnimationConfig) {
   // Auto start animation if no other options override this
@@ -41,7 +41,7 @@ export function useAnim(config: AnimationConfig) {
   return { startedAnimation }
 }
 
-// This function is only important, such that it can be used in tests.
+// This function is only exported, such that it can be used in tests.
 export const __createUseAnimEffect = (
   startedAnimation: boolean,
   animationContext: AnimationContextProps|undefined,
@@ -61,7 +61,7 @@ export const __createUseAnimEffect = (
 
   setTimeout(() => {
     let startTime = Date.now()
-    let reverse = false
+    let reverse = config.playMode === 'reverse'
 
     const update = () => {
       const elapsed = Date.now() - startTime
@@ -72,7 +72,11 @@ export const __createUseAnimEffect = (
       }
 
       if (config.easing) {
-        t = config.easing(t)
+        if (reverse) {
+          t = 1 - config.easing(1-t)
+        } else {
+          t = config.easing(t)
+        }
       }
 
       config.updateFunc(t)

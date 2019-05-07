@@ -162,12 +162,12 @@ describe('use-anim', () => {
     animEffect()
 
     // Should be done after this delay, unless it's looping
-    await delay(25)
+    await delay(50)
 
     running = false
 
     // If running, allow it some time to set running to true
-    await delay(25)
+    await delay(50)
 
     expect(running).toBe(true)
   })
@@ -189,5 +189,19 @@ describe('use-anim', () => {
     animEffect()
 
     await delay(150)
+  })
+
+  it('starts at 1 when play mode is reverse', async () => {
+    const animEffect = __createUseAnimEffect(true, undefined, {
+      duration: Infinity,
+      updateFunc: (t) => {
+        expect(t).toBe(1)
+      },
+      playMode: 'reverse',
+    })
+
+    animEffect()
+
+    await delay(50)
   })
 })
