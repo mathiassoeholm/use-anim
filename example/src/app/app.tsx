@@ -6,7 +6,7 @@ import { useAnim, easing } from 'use-anim'
 const App: React.FC = () => {
   const [translation, setTranslation] = useState(0);
   const [rotation, setRotation] = useState(0);
-  const [textAnimValue, setTextAnimValue] = useState(0)
+  const [text, setText] = useState('')
   const [opacity, setOpacity] = useState(0)
 
   useAnim({
@@ -22,7 +22,8 @@ const App: React.FC = () => {
   useAnim({
     duration: 8000,
     updateFunc: (t) => {
-      setTextAnimValue(t)
+      let text = 'This text is being typed by use-anim :-)'
+      setText(text.slice(0, Math.round(text.length*t)))
     },
   })
 
@@ -33,14 +34,9 @@ const App: React.FC = () => {
     },
   })
 
-  const getText = () => {
-    let text = 'This text is being typed by use-anim :-)'
-    return text.slice(0, Math.round(text.length*textAnimValue))
-  }
-
   return (
     <div className="container" style={{ opacity: opacity }}>
-      <h1>{getText()}</h1>
+      <h1>{text}</h1>
       <div className="ball" style={{ transform: `translateX(${translation}px) rotate(${rotation}deg)`}}/>
     </div>
   );
