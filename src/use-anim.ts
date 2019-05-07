@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { AnimationContext } from "./animation-context"
+import {AnimationContext, AnimationContextProps} from "./animation-context"
 
 interface AnimationConfig {
   updateFunc: UpdateFunc,
@@ -15,7 +15,7 @@ export function useAnim(config: AnimationConfig) {
   // Auto start animation if no other options override this
   let shouldStart = true
 
-  const animationContext = useContext(AnimationContext)
+  const animationContext = useContext<AnimationContextProps|undefined>(AnimationContext)
 
   if (animationContext && animationContext.started != undefined) {
     shouldStart = animationContext.started
@@ -72,9 +72,5 @@ export function useAnim(config: AnimationConfig) {
     }
   }, [startedAnimation])
 
-  const startAnimation = () => {
-    setStartedAnimation(true)
-  }
-
-  return { startAnimation }
+  return { startedAnimation }
 }
