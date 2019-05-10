@@ -8,7 +8,9 @@
     "start": "webpack-dev-server -d --content-base ./public"
   },
   "dependencies": {
-    "use-anim": "file:../"
+    "use-anim": "^0.2.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^2.0.2",
