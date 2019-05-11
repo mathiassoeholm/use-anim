@@ -3,7 +3,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/use-anim)](https://bundlephobia.com/result?p=use-anim)
 [![npm version](https://badgen.net/npm/v/use-anim)](https://www.npmjs.com/package/use-anim)
 
-Super small easy-to-use hook-based animation framework for React.
+Super small easy-to-use hook-based animation library for React.
 
 * Zero dependencies
 * Written in TypeScript
@@ -46,5 +46,28 @@ const FadeReveal = ({ children }) => {
 }
 ```
 
+### AnimationConfig
+
+To start an animation you give useAnim an object compatible with the following interface:
+
+```typescript
+interface AnimationConfig {
+  updateFunc: UpdateFunc,
+  duration: number,
+  easing?: Easing,
+  started?: boolean,
+  playMode?: PlayMode,
+}
+```
+
+**updateFunc:** The code to run on every animation frame. It's a function which optionally takes a parameter `t`.
+
+**duration:** How long does the animation run in milliseconds.
+
+**easing:** A function that accepts a value `t` in range 0-1 and returns a modified number in the same range. This is used to get a more smooth animation.
+
+**started:** If the animation should not start automatically, you can set this value to `false`. The animation will start when this is changed to `true`.
+
+**playMode:** Controls playback of the animation. Valid values are: `forward` (default), `reverse`, `loop` and `pingPong`. 
 
 ### Contributing
