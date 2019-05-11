@@ -28,3 +28,17 @@ body {
 .text {
   width: 100%;
 }
+
+.staggered-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.staggered-box {
+  width: 20px;
+  height: 20px;
+  background: white;
+  margin: 10px;
+}

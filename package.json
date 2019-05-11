@@ -4,7 +4,9 @@
   "description": "A super small hook-based animation library for React",
   "main": "lib/index",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "jest",
+    "copy-to-example": "rm example/node_modules/use-anim -rf && cp lib example/node_modules/use-anim -rf"
   },
   "repository": {
     "type": "git",

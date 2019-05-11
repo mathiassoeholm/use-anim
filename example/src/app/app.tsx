@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './app.css'
-import { useAnim, easing } from 'use-anim'
+import { useAnim, easing, AnimationGroup } from 'use-anim'
 import { lerp } from '@mathiassoeholm/js-utils/math'
 
 const App: React.FC = () => {
@@ -39,8 +39,32 @@ const App: React.FC = () => {
     <div className="container" style={{ opacity: opacity }}>
       <h1>{text}</h1>
       <div className="ball" style={{ transform: `translateX(${translation}px) rotate(${rotation}deg)`}}/>
+      <div className="staggered-box-container">
+        <AnimationGroup stagger={200}>
+          <StaggeredBox />
+          <StaggeredBox />
+          <StaggeredBox />
+          <StaggeredBox />
+          <StaggeredBox />
+          <StaggeredBox />
+        </AnimationGroup>
+      </div>
     </div>
   );
+}
+
+const StaggeredBox: React.FC = () => {
+  const [translation, setTranslation] = useState(-200)
+
+  useAnim({
+    duration: 800,
+    updateFunc: (t) => {
+      setTranslation(lerp(-200, 200, t))
+    },
+    easing: easing.easeOutBack,
+  })
+
+  return <div className="staggered-box" style={{ transform: `translateX(${translation}px)`}}/>
 }
 
 ReactDOM.render(

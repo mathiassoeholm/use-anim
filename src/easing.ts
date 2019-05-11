@@ -25,5 +25,7 @@ export default {
   // decelerating to zero velocity
   easeOutQuint: function (t: number) { return 1+(--t)*t*t*t*t },
   // acceleration until halfway, then deceleration
-  easeInOutQuint: function (t: number) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
+  easeInOutQuint: function (t: number) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t },
+  // slighlty overshoots the target for an elastic effect
+  easeOutBack: function (t: number) { return (t=t-1)*t*((1.70158+1)*t + 1.70158) + 1 },
 }
