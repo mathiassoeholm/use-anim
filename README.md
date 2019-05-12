@@ -70,9 +70,9 @@ interface AnimationConfig {
 
 **playMode:** Controls playback of the animation. Valid values are: `forward` (default), `reverse`, `loop` and `pingPong`. 
 
-### Contributing
+### Contributing 👍
 
-Pull requests are very welcome 👍
+Pull requests are very welcome
 
 To test locally, you can use:
 
@@ -86,3 +86,5 @@ You can now test your new addition in the example project.
 
     cd example
     npm start
+
+<sub>Note: Remember to run `npm install` in both the root directory and the example directory.</sub>
