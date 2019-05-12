@@ -71,3 +71,18 @@ interface AnimationConfig {
 **playMode:** Controls playback of the animation. Valid values are: `forward` (default), `reverse`, `loop` and `pingPong`. 
 
 ### Contributing
+
+Pull requests are very welcome 👍
+
+To test locally, you can use:
+
+    npm run build
+    npm run copy-to-example
+    
+<sub>Note: The copy-to-example script uses the `cp` command which is not available through CMD on Windows. You can use Git Bash instead.</sub>
+
+This will compile TypeScript to JavaScript in a folder called lib and copy this folder to example/node_modules/use-anim.
+You can now test your new addition in the example project.
+
+    cd example
+    npm start
