@@ -9,6 +9,8 @@ Super small easy-to-use hook-based animation library for React.
 * Written in TypeScript
 * Very small code-base
 
+Check it out on [CodeSandbox](https://codesandbox.io/s/4kox1m1m7?fontsize=14)!
+
 ### Installation
 
     npm install use-anim
