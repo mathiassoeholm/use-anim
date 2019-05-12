@@ -116,17 +116,6 @@ describe('use-anim', () => {
     await delay(50)
   })
 
-  it('does not call update func if not started', async () => {
-    const animEffect = __createUseAnimEffect(false, undefined, {
-      duration: 50,
-      updateFunc: () => fail()
-    })
-
-    animEffect()
-
-    await delay(50)
-  })
-
   it('can be started and stopped', async () => {
     let running = false
 
