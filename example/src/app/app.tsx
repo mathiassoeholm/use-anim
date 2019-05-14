@@ -12,27 +12,24 @@ const App: React.FC = () => {
 
   useAnim({
     duration: 2000,
-    updateFunc: (t) => {
-      setTranslation(lerp(-300, 300, t))
-      setRotation(t*360)
-    },
     playMode: 'pingPong',
     easing: easing.easeInOutQuad,
+  }, t => {
+    setTranslation(lerp(-300, 300, t))
+    setRotation(t*360)
   });
 
   useAnim({
     duration: 8000,
-    updateFunc: (t) => {
-      let text = 'This text is being typed by use-anim :-)'
-      setText(text.slice(0, Math.round(text.length*t)))
-    },
+  }, t => {
+    let text = 'This text is being typed by use-anim :-)'
+    setText(text.slice(0, Math.round(text.length*t)))
   })
 
   useAnim({
     duration: 1000,
-    updateFunc: (t) => {
-      setOpacity(t)
-    },
+  }, t => {
+    setOpacity(t)
   })
 
   return (
@@ -58,10 +55,9 @@ const StaggeredBox: React.FC = () => {
 
   useAnim({
     duration: 800,
-    updateFunc: (t) => {
-      setTranslation(lerp(-200, 200, t))
-    },
     easing: easing.easeOutBack,
+  }, t => {
+    setTranslation(lerp(-200, 200, t))
   })
 
   return <div className="staggered-box" style={{ transform: `translateX(${translation}px)`}}/>

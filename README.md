@@ -33,11 +33,10 @@ const FadeReveal = ({ children }) => {
 
   useAnim({
     duration: 500,
-    updateFunc: (t) => {
-      setOpacity(t)
-      setTranslation(-30*(1-t))
-    },
     easing: easing.easeOutQuad,
+  }, t => {
+    setOpacity(t)
+    setTranslation(-30*(1-t))
   })
 
   return (
@@ -50,19 +49,16 @@ const FadeReveal = ({ children }) => {
 
 ### AnimationConfig
 
-To start an animation you give useAnim an object compatible with the following interface:
+To start an animation you give useAnim an object compatible with the following interface as the first parameter:
 
 ```typescript
 interface AnimationConfig {
-  updateFunc: UpdateFunc,
   duration: number,
   easing?: Easing,
   started?: boolean,
   playMode?: PlayMode,
 }
 ```
-
-**updateFunc:** The code to run on every animation frame. It's a function which optionally takes a parameter `t`.
 
 **duration:** How long does the animation run in milliseconds.
 
@@ -71,6 +67,11 @@ interface AnimationConfig {
 **started:** If the animation should not start automatically, you can set this value to `false`. The animation will start when this is changed to `true`.
 
 **playMode:** Controls playback of the animation. Valid values are: `forward` (default), `reverse`, `loop` and `pingPong`. 
+
+The second parameter, known as `updateFunc`, is a function which takes a parameter `t`. This is called every frame during the animation, with `t` running from 0 to 1.
+
+### Drawbacks 😕
+[As pointed out by a good Reddit user](https://www.reddit.com/r/reactjs/comments/bnqcnm/i_created_a_super_small_animation_library_for/enbdxw3?utm_source=share&utm_medium=web2x), using `setState` every frame can be expensive. It will trigger a rerender of the component and all its children. Therefore I recommend using this library for simple components that reside near the leafs.
 
 ### Contributing 👍
 

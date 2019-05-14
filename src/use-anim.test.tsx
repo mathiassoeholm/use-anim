@@ -7,12 +7,13 @@ import AnimationGroup from './AnimationGroup'
 
 describe('use-anim', () => {
 
+  const doNothing = () => {}
+
   it('starts animation by default', async () => {
     const { result } = renderHook(() =>
       useAnim({
         duration: 1000,
-        updateFunc: () => {},
-      })
+      }, doNothing)
     )
 
     expect(result.current.startedAnimation).toBe(true)
@@ -22,9 +23,8 @@ describe('use-anim', () => {
     const { result } = renderHook(() =>
       useAnim({
         duration: 1000,
-        updateFunc: () => {},
         started: false,
-      })
+      }, doNothing)
     )
 
     expect(result.current.startedAnimation).toBe(false)
@@ -34,8 +34,7 @@ describe('use-anim', () => {
     const { result } = renderHook(() =>
       useAnim({
         duration: 1000,
-        updateFunc: () => {},
-      }),
+      }, doNothing),
       {
         wrapper: ({children}) => (
           <AnimationGroup started={false} >
@@ -52,8 +51,7 @@ describe('use-anim', () => {
     const { result } = renderHook(() =>
         useAnim({
           duration: 1000,
-          updateFunc: () => {},
-        }),
+        }, doNothing),
       {
         wrapper: ({children}) => (
           <AnimationGroup started={true} >
@@ -70,9 +68,8 @@ describe('use-anim', () => {
     const { result } = renderHook(() =>
         useAnim({
           duration: 1000,
-          updateFunc: () => {},
           started: true,
-        }),
+        }, doNothing),
       {
         wrapper: ({children}) => (
           <AnimationGroup started={false} >
@@ -89,8 +86,7 @@ describe('use-anim', () => {
     const { result } = renderHook(() =>
         useAnim({
           duration: 1000,
-          updateFunc: () => {},
-        }),
+        }, doNothing),
       {
         wrapper: ({children}) => (
           <AnimationGroup started={true} >
@@ -108,8 +104,7 @@ describe('use-anim', () => {
   it('does not call update func if not started', async () => {
     const animEffect = __createUseAnimEffect(false, undefined, {
       duration: 50,
-      updateFunc: () => fail()
-    })
+    }, () => fail())
 
     animEffect()
 
@@ -121,8 +116,7 @@ describe('use-anim', () => {
 
     const animEffect = __createUseAnimEffect(true, undefined, {
       duration: 1000000,
-      updateFunc: () => running = true
-    })
+    }, () => running = true)
 
     const stopEffect = animEffect()
 
@@ -144,9 +138,8 @@ describe('use-anim', () => {
 
     const animEffect = __createUseAnimEffect(true, undefined, {
       duration: 5,
-      updateFunc: () => running = true,
       playMode: playMode,
-    })
+    }, () => running = true)
 
     animEffect()
 
@@ -168,11 +161,10 @@ describe('use-anim', () => {
 
     const animEffect = __createUseAnimEffect(true, undefined, {
       duration: 0,
-      updateFunc: (t) => {
-        expect(t).toBe(expectedValue)
-        expectedValue = 1 - expectedValue
-      },
       playMode: 'pingPong',
+    }, (t) => {
+      expect(t).toBe(expectedValue)
+      expectedValue = 1 - expectedValue
     })
 
     animEffect()
@@ -183,10 +175,9 @@ describe('use-anim', () => {
   it('starts at 1 when play mode is reverse', async () => {
     const animEffect = __createUseAnimEffect(true, undefined, {
       duration: Infinity,
-      updateFunc: (t) => {
-        expect(t).toBe(1)
-      },
       playMode: 'reverse',
+    }, (t) => {
+      expect(t).toBe(1)
     })
 
     animEffect()
